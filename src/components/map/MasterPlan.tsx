@@ -17,7 +17,8 @@ export default function MasterPlan() {
 
   const fetchPlots = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/plots/');
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+      const response = await fetch(`${API_URL}/api/plots/`);
       if (response.ok) {
         const data: Plot[] = await response.json();
         // Sort plots sequentially by their plotNumber
@@ -42,7 +43,8 @@ export default function MasterPlan() {
   };
 
   const handleBookPlot = async (plotId: string, bookingData: any) => {
-    const response = await fetch('http://localhost:8000/api/bookings/', {
+    const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+    const response = await fetch(`${API_URL}/api/bookings/`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
